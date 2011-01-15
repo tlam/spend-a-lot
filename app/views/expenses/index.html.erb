@@ -3,9 +3,10 @@
 <table>
   <tr>
     <th>Description</th>
-    <th>Type</th>
+    <th>Payment</th>
     <th>Amount</th>
     <th>Date</th>
+    <th>Category</th>
     <th></th>
     <th></th>
     <th></th>
@@ -14,9 +15,10 @@
 <% @expenses.each do |expense| %>
   <tr>
     <td><%= expense.description %></td>
-    <td><%= expense.type %></td>
+    <td><%= expense.payment_description %></td>
     <td><%= expense.amount %></td>
     <td><%= expense.date %></td>
+    <td><%= expense.category.name %></td>
     <td><%= link_to 'Show', expense %></td>
     <td><%= link_to 'Edit', edit_expense_path(expense) %></td>
     <td><%= link_to 'Destroy', expense, :confirm => 'Are you sure?', :method => :delete %></td>

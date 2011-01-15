@@ -1,0 +1,22 @@
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 0.95em;
+  margin-top: 0;
+  text-align: center;
+}
+
+a {
+  color: #4183C4;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+#content, #header, #footer {
+  margin: 0 auto;
+  overflow: hidden;
+  text-align: left;
+  width: 1000px;
+}

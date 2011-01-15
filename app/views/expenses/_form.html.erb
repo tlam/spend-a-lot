@@ -16,8 +16,8 @@
     <%= f.text_field :description %>
   </div>
   <div class="field">
-    <%= f.label :type %><br />
-    <%= f.text_field :type %>
+    <%= f.label :payment %><br />
+    <%= select("expense", "payment", Expense.payment_choices) %>
   </div>
   <div class="field">
     <%= f.label :amount %><br />
@@ -26,6 +26,10 @@
   <div class="field">
     <%= f.label :date %><br />
     <%= f.date_select :date %>
+  </div>
+  <div class="field">
+    <%= f.label :category_id %><br />
+    <%= select("expense", "category_id", Category.all.collect {|c| [c.name, c.id]}, {:include_blank => '---'}) %>
   </div>
   <div class="actions">
     <%= f.submit %>
