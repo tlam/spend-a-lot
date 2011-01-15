@@ -1,4 +1,6 @@
 SpendALot::Application.routes.draw do
+  resources :expenses
+
   get 'home/index'
   root :to => 'home#index'
 
