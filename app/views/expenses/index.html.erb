@@ -14,13 +14,12 @@
 
 <% @expenses.each do |expense| %>
   <tr>
-    <td><%= expense.description %></td>
-    <td><%= expense.payment_description %></td>
-    <td><%= expense.amount %></td>
+    <td><%= link_to expense.description, edit_expense_path(expense) %></td>
+    <td><%= expense.payment_display %></td>
+    <td><%= expense.amount_display %></td>
     <td><%= expense.date %></td>
     <td><%= expense.category.name %></td>
     <td><%= link_to 'Show', expense %></td>
-    <td><%= link_to 'Edit', edit_expense_path(expense) %></td>
     <td><%= link_to 'Destroy', expense, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>

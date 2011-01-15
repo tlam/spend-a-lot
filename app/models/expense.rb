@@ -11,9 +11,13 @@ class Expense < ActiveRecord::Base
     @@descriptions.zip(@@payment_choices)
   end
 
-  def payment_description
+  def payment_display
     # instance method
     index = @@payment_choices.index(self.payment)
     @@descriptions[index]
+  end
+
+  def amount_display
+    '%.2f' % self.amount
   end
 end
