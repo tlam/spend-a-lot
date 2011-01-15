@@ -1,10 +1,12 @@
 SpendALot::Application.routes.draw do
   resources :categories
-
   resources :expenses
 
   get 'home/index'
   root :to => 'home#index', :as => :home
+
+  match 'statements' => 'statements#index'
+  match 'statements/upload' => 'statements#upload'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
