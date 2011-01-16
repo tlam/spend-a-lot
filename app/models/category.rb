@@ -18,7 +18,7 @@ class Category < ActiveRecord::Base
 
   def has_keywords(keywords)
     self.keywords.each do |keyword|
-      return true if keyword.words == keywords
+      return true if keyword.words.upcase == keywords.upcase
     end
     return false
   end

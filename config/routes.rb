@@ -15,6 +15,7 @@ SpendALot::Application.routes.draw do
   match 'statements/delete' => 'statements#delete'
   match 'statements/load' => 'statements#load'
   match 'statements/upload' => 'statements#upload'
+  match 'statements/wesabe' => 'statements#wesabe'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

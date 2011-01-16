@@ -1,5 +1,9 @@
 <h1>Listing keywords</h1>
 
+<p>
+<%= link_to 'New Keyword', new_keyword_path %>
+</p>
+
 <table>
   <tr>
     <th>Words</th>
@@ -10,10 +14,8 @@
 
 <% @keywords.each do |keyword| %>
   <tr>
-    <td><%= keyword.words %></td>
+    <td><%= link_to keyword.words, edit_keyword_path(keyword) %></td>
     <td><%= keyword.category.name if keyword.category %></td>
-    <td><%= link_to 'Show', keyword %></td>
-    <td><%= link_to 'Edit', edit_keyword_path(keyword) %></td>
     <td><%= link_to 'Destroy', keyword, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>

@@ -40,7 +40,6 @@ class CategoriesController < ApplicationController
   # POST /categories
   # POST /categories.xml
   def create
-    puts 'calling create'
     @category = Category.new(params[:category])
 
     respond_to do |format|

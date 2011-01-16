@@ -41,6 +41,21 @@ class StatementsController < ApplicationController
     end
   end
 
+  def wesabe
+    if params[:filename].nil?
+      flash[:notice] = 'Wesabe file does not exist'
+      return redirect_to :action => 'index'
+    else
+      loaded = LoadFile.wesabe(params[:filename])
+      if loaded
+        flash[:notice] = 'Wesabe data loaded'
+      else
+        flash[:notice] = 'Wesabe load failed'
+      end
+      return redirect_to :action => 'index'
+    end
+  end
+
   def delete
     if params[:filename].nil?
       flash[:notice] = 'Filename does not exist'

@@ -12,12 +12,16 @@
   <table>
   <% @files.each do |file| %>
     <tr>
-      <% form_for(:statements, :url => {:action => "load"}) do |form| %>
         <td><%= file %></td>
+        <% form_for(:statements, :url => {:action => "load"}) do |form| %>
         <td><%= submit_tag "Load" %></td>
-        <td><%= link_to "Delete", :filename => file, :action => "delete", :confirm => "Are you sure?", :method => :delete %></td>
         <input type="hidden" name="filename" value="<%= file %>" />
-      <% end %>
+        <% end %>
+        <% form_for(:statements, :url => {:action => "wesabe"}) do |form| %>
+        <td><%= submit_tag "Wesabe" %></td>
+        <input type="hidden" name="filename" value="<%= file %>" />
+        <% end %>
+        <td><%= link_to "Delete", :filename => file, :action => "delete", :confirm => "Are you sure?", :method => :delete %></td>
     </tr>
   <% end %>
   </table>

@@ -2,7 +2,7 @@ class KeywordsController < ApplicationController
   # GET /keywords
   # GET /keywords.xml
   def index
-    @keywords = Keyword.joins(:category).order('name')
+    @keywords = Keyword.joins(:category).order('name', 'words')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -42,8 +42,13 @@ class KeywordsController < ApplicationController
   def create
     @keyword = Keyword.new(params[:keyword])
 
+
     respond_to do |format|
       if @keyword.save
+        if params['add-another']
+          flash[:notice] = 'Keyword created'
+          return redirect_to :action => 'new'
+        end
         format.html { redirect_to(@keyword, :notice => 'Keyword was successfully created.') }
         format.xml  { render :xml => @keyword, :status => :created, :location => @keyword }
       else
