@@ -40,6 +40,7 @@ class CategoriesController < ApplicationController
   # POST /categories
   # POST /categories.xml
   def create
+    puts 'calling create'
     @category = Category.new(params[:category])
 
     respond_to do |format|
@@ -79,5 +80,15 @@ class CategoriesController < ApplicationController
       format.html { redirect_to(categories_url) }
       format.xml  { head :ok }
     end
+  end
+
+  def assign
+    assigned = Category.assign
+    if assigned
+      flash[:notice] = 'Categories assinged'
+    else
+      flash[:notice] = 'No categories assigned'
+    end
+    redirect_to :action => 'index'
   end
 end

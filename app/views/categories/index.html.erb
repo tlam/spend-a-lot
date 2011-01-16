@@ -21,3 +21,9 @@
 <br />
 
 <%= link_to 'New Category', new_category_path %>
+
+<p>
+  <% form_for(:categories, :url => {:action => "assign"}) do |form| %>
+    <%= submit_tag "Assign Categories" %>
+  <% end %>
+</p>

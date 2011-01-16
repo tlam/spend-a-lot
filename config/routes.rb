@@ -1,10 +1,16 @@
 SpendALot::Application.routes.draw do
-  resources :categories
+  resources :categories do
+    collection do
+      get 'assign'
+    end
+  end
   resources :expenses
+  resources :keywords
 
   get 'home/index'
   root :to => 'home#index', :as => :home
 
+  match 'categories/assign' => 'categories#assign'
   match 'statements' => 'statements#index'
   match 'statements/delete' => 'statements#delete'
   match 'statements/load' => 'statements#load'
