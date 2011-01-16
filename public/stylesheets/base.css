@@ -27,3 +27,25 @@ a:hover {
   background-color: #FFF1A8;
   padding: 0.2em 0.8em;
 }
+
+#header {
+  overflow: hidden;
+}
+
+#header h1 {
+  float: left;
+}
+
+#header #top-navigation {
+  float: right;
+  margin-top: 1em;
+}
+
+#header #top-navigation div {
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  border: 1px solid #AAA;
+  float: left;
+  margin-left: 1em;
+  padding: 0.7em;
+}
