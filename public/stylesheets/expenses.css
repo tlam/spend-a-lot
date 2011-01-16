@@ -1,0 +1,7 @@
+#list-expenses td {
+  padding-right: 2em;
+}
+
+#list-expenses .amount {
+  text-align: right;
+}

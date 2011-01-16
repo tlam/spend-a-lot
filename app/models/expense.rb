@@ -3,7 +3,7 @@ class Expense < ActiveRecord::Base
   @@payment_choices = %w(CA CC)
 
   belongs_to :category
-  validates_presence_of :description, :payment, :amount, :date, :category_id
+  validates_presence_of :description, :payment, :amount, :date
   validates_inclusion_of :payment, :in => @@payment_choices
 
   def self.payment_choices

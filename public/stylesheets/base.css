@@ -20,3 +20,10 @@ a:hover {
   text-align: left;
   width: 1000px;
 }
+
+#flash-messages {
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  background-color: #FFF1A8;
+  padding: 0.2em 0.8em;
+}

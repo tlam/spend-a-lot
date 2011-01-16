@@ -2,7 +2,7 @@ class ExpensesController < ApplicationController
   # GET /expenses
   # GET /expenses.xml
   def index
-    @expenses = Expense.all
+    @expenses = Expense.order('date DESC')
 
     respond_to do |format|
       format.html # index.html.erb

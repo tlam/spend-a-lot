@@ -6,6 +6,8 @@ SpendALot::Application.routes.draw do
   root :to => 'home#index', :as => :home
 
   match 'statements' => 'statements#index'
+  match 'statements/delete' => 'statements#delete'
+  match 'statements/load' => 'statements#load'
   match 'statements/upload' => 'statements#upload'
 
   # The priority is based upon order of creation:
