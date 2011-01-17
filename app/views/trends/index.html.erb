@@ -1,0 +1,18 @@
+<h2>Trends</h2>
+
+<% @expenses_months.each do |month, expenses| %>
+  <div>
+    <%= month.strftime("%B %Y") %> Total: <%= expenses.sum(&:amount) %>
+  </div>
+<% end %>
+
+<% @expenses_months.each do |month, expenses| %>
+  <h2><%= month.strftime("%B %Y") %></h2>
+  <% for expense in expenses %>
+    <div class="expense">
+      <%= expense.date.to_date.to_s(:long) %> -
+      <strong><%= expense.description %></strong> -
+      <%= expense.amount_display %>
+    </div>
+  <% end %>
+<% end %>

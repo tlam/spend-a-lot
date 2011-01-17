@@ -1,4 +1,6 @@
 SpendALot::Application.routes.draw do
+  match 'trends' => 'trends#index'
+
   resources :categories do
     collection do
       get 'assign'
