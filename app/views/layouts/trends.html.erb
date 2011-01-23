@@ -1,0 +1,13 @@
+<% content_for :content do %>
+  <b>Trending:</b>
+  <% @categories.each do |category| %>
+    <% if @category and @category.name == category.name %>
+      <b><%= category.name %></b> |
+    <% else %>
+      <%= link_to category.name, trends_category_path(category) %> |
+    <% end %>
+  <% end %>
+  <%= yield %>
+<% end %>
+
+<%= render :file => "layouts/application" %>

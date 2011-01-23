@@ -1,5 +1,6 @@
 SpendALot::Application.routes.draw do
   match 'trends' => 'trends#index'
+  match 'trends/category/:id' => 'trends#category', :as => :trends_category
 
   resources :categories do
     collection do

@@ -23,7 +23,7 @@
       <%= flash.notice %>
     </div>
     <% end %>
-    <%= yield %>
+    <%= content_for?(:content) ? yield(:content) : yield %>
   </div>
 </body>
 </html>

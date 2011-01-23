@@ -1,18 +1,17 @@
 <h2>Trends</h2>
 
-<% @categories.each do |category| %>
-  <div>
-    <h3><%= category.name %></h3>
-    <img src="<%= category.chart %>" />
-  </div>
-<% end %>
-<br />
-
+<table id="monthly-expenses">
+  <tr>
+    <th>Month</th>
+    <th>Amount</th>
+  </tr>
 <% @expenses_months.each do |month, expenses| %>
-  <div>
-    <%= month.strftime("%B %Y") %> Total: <%= expenses.sum(&:amount) %>
-  </div>
+  <tr>
+    <td><%= month.strftime("%B %Y") %></td>
+    <td class="amount"><%= number_with_precision(expenses.sum(&:amount), :precision => 2) %></td>
+  </tr>
 <% end %>
+</table>
 
 <% @expenses_months.each do |month, expenses| %>
   <h2><%= month.strftime("%B %Y") %></h2>
