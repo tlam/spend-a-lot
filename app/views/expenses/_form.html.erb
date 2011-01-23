@@ -25,8 +25,9 @@
   </div>
   <div class="field">
     <%= f.label :date %><br />
-    <%= f.date_select :date %>
+    <input id="expense_date" class="date-field" name="expense[date]" type="text" value="<%= @expense.date %>" />
   </div>
+
   <div class="field">
     <%= f.label :category_id %><br />
     <%= select("expense", "category_id", Category.all.collect {|c| [c.name, c.id]}, {:include_blank => '---'}) %>
