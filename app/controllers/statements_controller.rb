@@ -6,6 +6,8 @@ class StatementsController < ApplicationController
       @files.push(Pathname.new(file).basename)
     end
 
+    @files = @files.sort{|x,y| y <=> x}
+
     respond_to do |format|
       format.html # index.html.erb
     end
