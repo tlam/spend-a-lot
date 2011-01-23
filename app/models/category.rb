@@ -37,12 +37,14 @@ class Category < ActiveRecord::Base
       month_data.push(month.strftime('%b %Y'))
     end
 
-    month_data = [month_data.join('|')]
+    max_value = bar_data.max
+    y_axis =  '0|%.2f|%.2f|%.2f|%.2f' % [max_value*0.25, max_value*0.5, max_value*0.75, max_value]
+    month_data = [month_data.join('|'), y_axis]
 
     @bar = Gchart.bar(:data => bar_data,
                       :axis_with_labels => 'x,y',
                       :axis_labels => month_data,
                       :bar_width_and_spacing => '30,22',
-                      :size => '950x200')
+                      :size => '960x200')
   end
 end
