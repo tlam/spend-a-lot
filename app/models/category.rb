@@ -45,6 +45,20 @@ class Category < ActiveRecord::Base
                       :axis_with_labels => 'x,y',
                       :axis_labels => month_data,
                       :bar_width_and_spacing => '30,22',
-                      :size => '960x200')
+                      :size => '980x200')
+  end
+
+  def monthly_data
+    month_expenses = Expense.where('category_id = ?', self.id).order('date').group_by { |c| c.date.beginning_of_month }
+
+    @output = {}
+    month_expenses.each do |month, expenses|
+      sum = 0
+      expenses.each do |expense|
+        sum += expense.amount
+      end
+      @output[month.strftime('%b %Y')] = sum
+    end
+    @output
   end
 end

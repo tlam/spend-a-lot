@@ -49,3 +49,8 @@ a:hover {
   margin-left: 1em;
   padding: 0.7em;
 }
+
+ul.ui-autocomplete {
+  font-size: 0.9em;
+  text-align: left;
+}

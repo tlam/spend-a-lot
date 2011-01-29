@@ -1,2 +1,17 @@
 <h3><%= @category.name %></h3>
 <img src="<%= @category.chart %>" />
+
+<table>
+<% @monthly_data.each do |month, sum| %>
+  <tr>
+    <td><%= month %></td>
+    <td><%= sum %></td>
+  </tr>
+<% end %>
+</table>
+
+<div id="months">
+<% @months.each do |month| %>
+  <span><%= month %></span>
+<% end %>
+</div>

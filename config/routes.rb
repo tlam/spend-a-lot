@@ -7,7 +7,11 @@ SpendALot::Application.routes.draw do
       get 'assign'
     end
   end
-  resources :expenses
+  resources :expenses do
+    collection do
+      get 'descriptions'
+    end
+  end
   resources :keywords
 
   get 'home/index'

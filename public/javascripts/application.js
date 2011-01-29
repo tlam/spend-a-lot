@@ -4,4 +4,7 @@ $(document).ready(function() {
             dateFormat: 'yy-mm-dd'
         });
     });
+    $("#expense_description").autocomplete({
+        source: "/expenses/descriptions",
+    });
 });

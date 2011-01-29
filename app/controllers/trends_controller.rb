@@ -8,6 +8,8 @@ class TrendsController < ApplicationController
 
   def category
     @category = Category.find(params[:id])
+    @monthly_data = @category.monthly_data
+    @months = @monthly_data.keys
   end
 
   private

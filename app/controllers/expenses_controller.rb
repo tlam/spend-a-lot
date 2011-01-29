@@ -44,6 +44,10 @@ class ExpensesController < ApplicationController
 
     respond_to do |format|
       if @expense.save
+        if params['add-another']
+          flash[:notice] = 'Expense created'
+          return redirect_to :action => 'new'
+        end
         format.html { redirect_to(@expense, :notice => 'Expense was successfully created.') }
         format.xml  { render :xml => @expense, :status => :created, :location => @expense }
       else
@@ -79,5 +83,16 @@ class ExpensesController < ApplicationController
       format.html { redirect_to(expenses_url) }
       format.xml  { head :ok }
     end
+  end
+
+  def descriptions
+    if params[:term]
+      @expenses = Expense.where('description ilike ?', '%' + params[:term] + '%')
+    else
+      @expenses = Expense.all
+    end
+
+    @expenses = @expenses.select("DISTINCT(description)").order("description")
+    render :json => @expenses.map(&:description)
   end
 end
