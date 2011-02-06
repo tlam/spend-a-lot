@@ -44,16 +44,19 @@ function drawVisualization() {
 }
       
 function drawCategory() {
+    var category_id = $("#category-id").val();
+    var category_name = $("#category-name").val();
+    if (category_id == undefined || category_name == undefined) {
+        return 0;
+    }
+
     // Create and populate the data table.
     var data = new google.visualization.DataTable();
-    var raw_data = [["Grocery", 6651824, 5940129, 5714009, 6190532, 6420270, 6240921]];
         
-    data.addColumn('string', 'Category');
-    for (var i = 0; i  < raw_data.length; ++i) {
-        data.addColumn('number', raw_data[i][0]); 
-    }
-        
-    $.getJSON("/trends/category/980190962.json", function(monthly_data) {
+    data.addColumn("string", category_name);
+    data.addColumn("number", category_name); 
+       
+    $.getJSON("/trends/category/" + category_id + ".json", function(monthly_data) {
         data.addRows(Object.size(monthly_data));
 
         var j = 0;
@@ -66,9 +69,10 @@ function drawCategory() {
         // Create and draw the visualization.
         new google.visualization.ColumnChart(document.getElementById('category')).
             draw(data,
-                 {title:"Category by month", 
-                  width:600, height:400,
-                  hAxis: {title: "Year"}}
+                 {title: category_name + " spending by month", 
+                  width:800, height:400,
+                  hAxis: {title: "Month"},
+                  vAxis: {title: "Amount"}}
             );
     });
 }

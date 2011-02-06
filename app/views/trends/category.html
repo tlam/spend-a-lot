@@ -1,5 +1,5 @@
 <h3><%= @category.name %></h3>
-<img src="<%= @category.chart %>" />
+<div id="category"></div>
 
 <table>
 <% @monthly_data.each do |month, sum| %>
@@ -10,8 +10,5 @@
 <% end %>
 </table>
 
-<div id="months">
-<% @months.each do |month| %>
-  <span><%= month %></span>
-<% end %>
-</div>
+<input type="hidden" id="category-id" value="<%= @category.id %>" />
+<input type="hidden" id="category-name" value="<%= @category.name %>" />
