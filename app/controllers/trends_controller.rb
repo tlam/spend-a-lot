@@ -10,6 +10,11 @@ class TrendsController < ApplicationController
     @category = Category.find(params[:id])
     @monthly_data = @category.monthly_data
     @months = @monthly_data.keys
+
+    respond_to do |format|
+      format.html
+      format.json { render :json => @monthly_data }
+    end
   end
 
   private

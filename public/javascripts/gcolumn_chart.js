@@ -1,3 +1,11 @@
+Object.size = function(obj) {
+    var size = 0, key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+};
+
 function drawVisualization() {
     // Create and populate the data table.
     var data = new google.visualization.DataTable();
@@ -38,33 +46,31 @@ function drawVisualization() {
 function drawCategory() {
     // Create and populate the data table.
     var data = new google.visualization.DataTable();
-    var raw_data = [['Grocery', 6651824, 5940129, 5714009, 6190532, 6420270, 6240921]];
+    var raw_data = [["Grocery", 6651824, 5940129, 5714009, 6190532, 6420270, 6240921]];
         
-    var months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun"];
-                        
     data.addColumn('string', 'Category');
     for (var i = 0; i  < raw_data.length; ++i) {
-        data.addColumn('number', raw_data[i][0]);    
+        data.addColumn('number', raw_data[i][0]); 
     }
         
-    data.addRows(months.length);
-      
-    for (var j = 0; j < months.length; ++j) {    
-        data.setValue(j, 0, months[j].toString());    
-    }
-    for (var i = 0; i  < raw_data.length; ++i) {
-        for (var j = 1; j  < raw_data[i].length; ++j) {
-            data.setValue(j-1, i+1, raw_data[i][j]);    
-        }
-    }
-        
-    // Create and draw the visualization.
-    new google.visualization.ColumnChart(document.getElementById('category')).
-        draw(data,
-             {title:"Category by month", 
-              width:600, height:400,
-              hAxis: {title: "Year"}}
-        );
+    $.getJSON("/trends/category/980190962.json", function(monthly_data) {
+        data.addRows(Object.size(monthly_data));
+
+        var j = 0;
+        $.each(monthly_data, function(month, total) {
+            data.setValue(j, 0, month.toString());
+            data.setValue(j, 1, parseFloat(total));
+            ++j;
+        });
+
+        // Create and draw the visualization.
+        new google.visualization.ColumnChart(document.getElementById('category')).
+            draw(data,
+                 {title:"Category by month", 
+                  width:600, height:400,
+                  hAxis: {title: "Year"}}
+            );
+    });
 }
 google.load('visualization', '1', {packages: ['corechart']});
 google.setOnLoadCallback(drawVisualization);
