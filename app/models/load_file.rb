@@ -12,6 +12,20 @@ class LoadFile < ActiveRecord::Base
       return false
     end
 
+    if filename.match('\.pc')
+      loaded = self.load_pcmastercard(file_path, 'CC')
+    else
+      loaded = self.load_scotia(file_path, payment)
+    end
+
+    if loaded
+      Category.assign
+    end
+
+    return loaded
+  end
+
+  def self.load_scotia(file_path, payment)
     open(file_path) do |fd|
       fd.each do |line|
         date, description, amount = line.split(',')
@@ -37,6 +51,31 @@ class LoadFile < ActiveRecord::Base
     end
 
     return true
+  end
+
+  def self.load_pcmastercard(file_path, payment)
+    open(file_path) do |fd|
+      fd.each do |line|
+        if line.start_with? 'Transaction Date'
+          next
+        end
+        transaction_date, posting_date, billing_amount, merchant = line.split(',')
+
+        date_obj = Date.strptime(transaction_date, '%m/%d/%Y')
+        squeezed_description = merchant[1...-1].squeeze(' ')
+
+        data = {
+          :date => date_obj,
+          :description => self.capitalise_description(squeezed_description),
+          :amount => BigDecimal.new(billing_amount[1..-1]),
+          :payment => 'CC',
+        }
+
+        next if Expense.exists?(data)
+
+        Expense.create(data)
+      end
+    end
   end
 
   def self.wesabe(filename)
