@@ -1,0 +1,15 @@
+<h3><%= @category.name %></h3>
+<div id="category"></div>
+
+<table>
+<% @monthly_data.each do |month, dict| %>
+  <tr>
+    <td><%= link_to month, trends_category_monthly_path(@category.slug, dict[:date].year, dict[:date].month) %></td>
+    <td><%= dict[:sum] %></td>
+  </tr>
+<% end %>
+</table>
+
+<input type="hidden" id="category-id" value="<%= @category.id %>" />
+<input type="hidden" id="category-name" value="<%= @category.name %>" />
+<input type="hidden" id="category-slug" value="<%= @category.slug %>" />

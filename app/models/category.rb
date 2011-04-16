@@ -3,6 +3,8 @@ class Category < ActiveRecord::Base
   has_many :expenses
   has_many :keywords
   validates_presence_of :name
+  validates :name, :presence => true, :uniqueness => true
+  validates :slug, :presence => true, :uniqueness => true
 
   def self.assign
     Expense.find_each do |expense|
@@ -57,7 +59,7 @@ class Category < ActiveRecord::Base
       expenses.each do |expense|
         sum += expense.amount
       end
-      @output[month.strftime('%b %Y')] = sum
+      @output[month.strftime('%b %Y')] = {:sum => sum, :date => month}
     end
     @output
   end

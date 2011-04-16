@@ -7,7 +7,11 @@ class TrendsController < ApplicationController
   end
 
   def category
-    @category = Category.find(params[:id])
+    @category = Category.where(:slug => params[:slug]).first
+    if @category.nil?
+      redirect_to :status => 404
+    end
+    
     @monthly_data = @category.monthly_data
     @months = @monthly_data.keys
 
@@ -15,6 +19,18 @@ class TrendsController < ApplicationController
       format.html
       format.json { render :json => @monthly_data }
     end
+  end
+
+  def monthly
+    @category = Category.where(:slug => params[:slug]).first
+    if @category.nil?
+      redirect_to :status => 404
+    end
+   
+    @month = Date.new(params[:year].to_i, params[:month].to_i)
+    @expenses = @category.expenses.where(:date => @month..@month.end_of_month).order(:date)
+
+    render :action => 'monthly'
   end
 
   private

@@ -1,6 +1,7 @@
 SpendALot::Application.routes.draw do
-  match 'trends' => 'trends#index'
-  match 'trends/category/:id' => 'trends#category', :as => :trends_category
+  match 'trends' => 'Trends#index'
+  match 'trends/:slug' => 'Trends#category', :as => :trends_category
+  match 'trends/:slug/:year/:month' => 'Trends#monthly', :as => :trends_category_monthly
 
   resources :categories do
     collection do
@@ -15,14 +16,14 @@ SpendALot::Application.routes.draw do
   resources :keywords
 
   get 'home/index'
-  root :to => 'home#index', :as => :home
+  root :to => 'Home#index', :as => :home
 
-  match 'categories/assign' => 'categories#assign'
-  match 'statements' => 'statements#index'
-  match 'statements/delete' => 'statements#delete'
-  match 'statements/load' => 'statements#load'
-  match 'statements/upload' => 'statements#upload'
-  match 'statements/wesabe' => 'statements#wesabe'
+  match 'categories/assign' => 'Categories#assign'
+  match 'statements' => 'Statements#index'
+  match 'statements/delete' => 'Statements#delete'
+  match 'statements/load' => 'Statements#load'
+  match 'statements/upload' => 'Statements#upload'
+  match 'statements/wesabe' => 'Statements#wesabe'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -1,0 +1,11 @@
+<h4><%= @category.name %> - <%= @month.strftime('%B %Y') %></h4>
+
+<table>
+<% @expenses.each do |expense| %>
+  <tr>
+    <td><%= expense.date.strftime('%b %d') %></td>
+    <td><%= expense.description %></td>
+    <td><%= expense.amount %></td>
+  </tr>
+<% end %>
+</table>

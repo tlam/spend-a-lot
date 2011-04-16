@@ -46,7 +46,9 @@ function drawVisualization() {
 function drawCategory() {
     var category_id = $("#category-id").val();
     var category_name = $("#category-name").val();
-    if (category_id == undefined || category_name == undefined) {
+    var category_slug = $("#category-slug").val();
+
+    if (category_id == undefined || category_name == undefined || category_slug == undefined) {
         return 0;
     }
 
@@ -56,13 +58,13 @@ function drawCategory() {
     data.addColumn("string", category_name);
     data.addColumn("number", category_name); 
        
-    $.getJSON("/trends/category/" + category_id + ".json", function(monthly_data) {
+    $.getJSON("/trends/" + category_slug + ".json", function(monthly_data) {
         data.addRows(Object.size(monthly_data));
 
         var j = 0;
-        $.each(monthly_data, function(month, total) {
+        $.each(monthly_data, function(month, dict) {
             data.setValue(j, 0, month.toString());
-            data.setValue(j, 1, parseFloat(total));
+            data.setValue(j, 1, parseFloat(dict.sum));
             ++j;
         });
 

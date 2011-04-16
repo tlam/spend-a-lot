@@ -4,7 +4,7 @@
     <% if @category and @category.name == category.name %>
       <b><%= category.name %></b> |
     <% else %>
-      <%= link_to category.name, trends_category_path(category) %> |
+      <%= link_to category.name, trends_category_path(category.slug) %> |
     <% end %>
   <% end %>
   <%= yield %>
