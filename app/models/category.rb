@@ -63,4 +63,20 @@ class Category < ActiveRecord::Base
     end
     @output
   end
+
+  def average(data=nil)
+    if data
+      results = data.clone
+    else
+      results = monthly_data()
+    end
+    current_month = Date.today.strftime('%b %Y')
+    results.delete(current_month)
+    total = 0
+    results.each do |month, info|
+      total += info[:sum]
+    end
+    avg = total / results.length
+    return avg
+  end
 end

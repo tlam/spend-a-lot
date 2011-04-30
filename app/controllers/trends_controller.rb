@@ -14,6 +14,14 @@ class TrendsController < ApplicationController
     
     @monthly_data = @category.monthly_data
     @months = @monthly_data.keys
+    @average = @category.average(@monthly_data)
+    current_month = Date.today.strftime('%b %Y')
+    if @monthly_data.has_key?(current_month)
+      @current_expense = @monthly_data[current_month][:sum]
+    else
+      @current_expense = 0
+    end
+    @difference = @current_expense - @average
 
     respond_to do |format|
       format.html

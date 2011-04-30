@@ -1,6 +1,22 @@
 <h3><%= @category.name %></h3>
 <div id="category"></div>
 
+<div>
+  Monthly average: <%= number_with_precision(@average, :precision => 2)  %>
+</div>
+<div>
+  Current expense: <%= number_with_precision(@current_expense, :precision => 2) %>
+</div>
+<div>
+  You are
+  <% if @difference >= 0 %>
+    above
+  <% else %>
+    below
+  <% end %>
+  the monthly average by <%= number_with_precision(@difference, :precision => 2) %>
+</div>
+
 <table>
 <% @monthly_data.each do |month, dict| %>
   <tr>

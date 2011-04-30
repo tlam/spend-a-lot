@@ -18,7 +18,7 @@ SpendALot::Application.routes.draw do
   get 'home/index'
   root :to => 'Home#index', :as => :home
 
-  match 'categories/assign' => 'Categories#assign'
+  match 'categories/assign' => 'categories#assign'
   match 'statements' => 'Statements#index'
   match 'statements/delete' => 'Statements#delete'
   match 'statements/load' => 'Statements#load'
