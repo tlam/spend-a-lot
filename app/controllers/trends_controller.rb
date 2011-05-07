@@ -38,6 +38,12 @@ class TrendsController < ApplicationController
     @month = Date.new(params[:year].to_i, params[:month].to_i)
     @expenses = @category.expenses.where(:date => @month..@month.end_of_month).order(:date)
 
+    @monthly_data = @category.monthly_data
+    @average = @category.average(@monthly_data)
+
+    @current_expense = @expenses.sum(:amount)
+    @difference = @current_expense - @average
+
     render :action => 'monthly'
   end
 

@@ -1,11 +1,28 @@
 <h4><%= @category.name %> - <%= @month.strftime('%B %Y') %></h4>
 
-<table>
+<div>
+  Monthly average: <%= number_with_precision(@average, :precision => 2)  %>
+</div>
+<div>
+  Monthly total: <%= number_with_precision(@current_expense, :precision => 2) %>
+</div>
+<div>
+  You are
+  <% if @difference >= 0 %>
+    above
+  <% else %>
+    below
+  <% end %>
+  the monthly average by <%= number_with_precision(@difference, :precision => 2) %>
+</div>
+<br />
+
+<table class="expense">
 <% @expenses.each do |expense| %>
   <tr>
     <td><%= expense.date.strftime('%b %d') %></td>
     <td><%= expense.description %></td>
-    <td><%= expense.amount %></td>
+    <td class="amount"><%= number_with_precision(expense.amount, :precision => 2) %></td>
   </tr>
 <% end %>
 </table>

@@ -51,7 +51,7 @@ class Category < ActiveRecord::Base
   end
 
   def monthly_data
-    month_expenses = Expense.where('category_id = ?', self.id).order('date').group_by { |c| c.date.beginning_of_month }
+    month_expenses = Expense.where(:category_id => self.id).order('date').group_by { |c| c.date.beginning_of_month }
 
     @output = {}
     month_expenses.each do |month, expenses|

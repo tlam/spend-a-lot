@@ -5,3 +5,7 @@
 #list-expenses .amount {
   text-align: right;
 }
+
+table.expense td.amount {
+  text-align: right;
+}

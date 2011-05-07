@@ -3,6 +3,7 @@ SpendALot::Application.routes.draw do
   match 'trends/:slug' => 'Trends#category', :as => :trends_category
   match 'trends/:slug/:year/:month' => 'Trends#monthly', :as => :trends_category_monthly
 
+  match 'categories/ajax-by-keyword' => 'categories#ajax_by_keyword'
   resources :categories do
     collection do
       get 'assign'

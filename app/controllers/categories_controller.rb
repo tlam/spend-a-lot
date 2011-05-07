@@ -90,4 +90,17 @@ class CategoriesController < ApplicationController
     end
     redirect_to :action => 'index'
   end
+
+  def ajax_by_keyword
+    description = params[:description]
+    expenses = Expense.where(:description => description)
+    if expenses
+        @category = {'category' => expenses[0].category_id}
+    else
+        @category = {'category' => 0}
+    end
+    respond_to do |format|
+      format.json { render :json => @category }
+    end
+  end
 end
