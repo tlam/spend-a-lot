@@ -1,7 +1,7 @@
 SpendALot::Application.routes.draw do
   match 'trends' => 'Trends#index'
   match 'trends/:slug' => 'Trends#category', :as => :trends_category
-  match 'trends/:slug/:year/:month' => 'Trends#monthly', :constraints => {:year => /\d{4}/, :month => /\d{2}/}, :as => :trends_category_monthly
+  match 'trends/:slug/:year/:month' => 'Trends#monthly', :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}, :as => :trends_category_monthly
 
   match 'categories/ajax-by-keyword' => 'categories#ajax_by_keyword'
   resources :categories do

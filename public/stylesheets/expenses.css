@@ -1,11 +1,16 @@
-#list-expenses td {
+.list-expenses td {
   padding-right: 2em;
 }
 
-#list-expenses .amount {
+.list-expenses .amount {
   text-align: right;
+}
+
+.list-expenses td.description {
+  width: 22em;
 }
 
 table.expense td.amount {
   text-align: right;
 }
+

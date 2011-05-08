@@ -2,30 +2,28 @@
 
 <h2>Listing expenses (<%= @expenses.count %>)</h2>
 
-<table id="list-expenses">
-  <tr>
-    <th>Date</th>
-    <th>Description</th>
-    <th>Payment</th>
-    <th>Amount</th>
-    <th>Category</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% @expenses.each do |expense| %>
-  <tr>
-    <td><%= expense.date %></td>
-    <td><%= link_to expense.description, edit_expense_path(expense) %></td>
-    <td><%= expense.payment_display %></td>
-    <td class="amount"><%= expense.amount_display %></td>
-    <td><%= expense.category.name if expense.category %></td>
-    <td><%= link_to "Destroy", expense, :confirm => "Are you sure?", :method => :delete %></td>
-  </tr>
+<% @expenses_months.each do |month, expenses| %>
+  <h2><%= month.strftime('%B %Y')%></h2>
+  <table class="list-expenses">
+    <tr>
+      <th>Date</th>
+      <th>Description</th>
+      <th>Payment</th>
+      <th>Amount</th>
+      <th>Category</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    <% expenses.each do |expense| %>
+    <tr>
+      <td><%= expense.date.strftime('%b %d') %></td>
+      <td class="description"><%= link_to expense.description, edit_expense_path(expense) %></td>
+      <td><%= expense.payment_display %></td>
+      <td class="amount"><%= expense.amount_display %></td>
+      <td><%= expense.category.name if expense.category %></td>
+      <td><%= link_to "Destroy", expense, :confirm => "Are you sure?", :method => :delete %></td>
+    </tr>
+    <% end %>
+  </table>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New Expense', new_expense_path %>

@@ -15,11 +15,27 @@
   <div id="header">
     <h1><%= link_to "Spend a Lot", home_path %></h1>
     <div id="top-navigation">
-      <div><%= link_to "Expenses", expenses_path %></div>
-      <div><%= link_to "Categories", categories_path %></div>
-      <div><%= link_to "Keywords", keywords_path %></div>
-      <div><%= link_to "Statements", statements_path %></div>
-      <div><%= link_to "Trends", trends_path %></div>
+      <div>
+      <% if request.request_uri == '/' %>
+         Overview
+      <% else %>
+        <%= link_to "Overview", home_path %>
+      <% end %>
+      </div>
+      <div>
+      <% if request.request_uri.include? 'expenses' %>
+        Expenses
+      <% else %>
+        <%= link_to "Expenses", expenses_path %>
+      <% end %>
+      </div>
+      <div>
+      <% if request.request_uri.include? 'trends' %>
+        Trends
+      <% else %>
+        <%= link_to "Trends", trends_path %>
+      <% end %>
+      </div>
     </div>
   </div>
   <div id="content">

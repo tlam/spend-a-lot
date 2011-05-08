@@ -38,16 +38,24 @@ a:hover {
 
 #header #top-navigation {
   float: right;
+  font-weight: bold;
+  letter-spacing: 1px;
   margin-top: 1em;
 }
 
 #header #top-navigation div {
+  /*
   -moz-border-radius: 8px;
   border-radius: 8px;
-  border: 1px solid #AAA;
+  */
+  border-left: 1px solid #AAA;
   float: left;
-  margin-left: 1em;
   padding: 0.7em;
+}
+
+#header #top-navigation div:last-child {
+
+  border-right: 1px solid #AAA;
 }
 
 ul.ui-autocomplete {
