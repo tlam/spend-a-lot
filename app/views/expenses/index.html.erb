@@ -3,7 +3,7 @@
 <h2>Listing expenses (<%= @expenses.count %>)</h2>
 
 <% @expenses_months.each do |month, expenses| %>
-  <h2><%= month.strftime('%B %Y')%></h2>
+  <h2><%= link_to month.strftime('%B %Y'), monthly_expenses_path(month.year, month.month) %></h2>
   <table class="list-expenses">
     <tr>
       <th>Date</th>

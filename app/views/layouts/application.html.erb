@@ -8,7 +8,11 @@
   <%= javascript_include_tag "jquery-ui.min.js" %>
   <%= javascript_include_tag :defaults %>
   <%= javascript_include_tag "http://www.google.com/jsapi" %>
+  <script type="text/javascript">
+    google.load('visualization', '1', {packages: ['corechart']});
+  </script>
   <%= javascript_include_tag "gcolumn_chart.js" %>
+  <%= javascript_include_tag "pie_chart.js" %>
   <%= csrf_meta_tag %>
 </head>
 <body>

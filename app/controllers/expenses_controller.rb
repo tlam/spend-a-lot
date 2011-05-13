@@ -96,4 +96,9 @@ class ExpensesController < ApplicationController
     @expenses = @expenses.select("DISTINCT(description)").order("description")
     render :json => @expenses.map(&:description)
   end
+
+  def monthly
+    @month = Date.new(params[:year].to_i, params[:month].to_i)
+    render :action => 'monthly'
+  end
 end

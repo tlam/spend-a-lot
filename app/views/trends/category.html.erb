@@ -20,7 +20,7 @@
 <table class="expense">
 <% @monthly_data.reverse_each do |month, dict| %>
   <tr>
-    <td><%= link_to month, trends_category_monthly_path(@category.slug, dict[:date].year, dict[:date].month) %></td>
+    <td><%= link_to month, category_monthly_trends_path(@category.slug, dict[:date].year, dict[:date].month) %></td>
     <td class="amount"><%= number_with_precision(dict[:sum], :precision => 2) %></td>
   </tr>
 <% end %>

@@ -1,30 +1,38 @@
 SpendALot::Application.routes.draw do
-  match 'trends' => 'Trends#index'
-  match 'trends/:slug' => 'Trends#category', :as => :trends_category
-  match 'trends/:slug/:year/:month' => 'Trends#monthly', :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}, :as => :trends_category_monthly
 
-  match 'categories/ajax-by-keyword' => 'categories#ajax_by_keyword'
-  resources :categories do
+  resources :trends do
     collection do
-      get 'assign'
+      match ':slug' => 'Trends#category', :as => :category
+      match 'trends/:slug/:year/:month' => 'Trends#monthly', :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}, :as => :category_monthly
     end
   end
+
+  resources :categories do
+    collection do
+      post 'assign'
+      match 'ajax-by-keyword' => 'categories#ajax_by_keyword'
+    end
+  end
+
   resources :expenses do
     collection do
       get 'descriptions'
+      match ':year/:month' => 'Expenses#monthly', :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}, :as => :monthly
     end
   end
+
   resources :keywords
 
-  get 'home/index'
-  root :to => 'Home#index', :as => :home
+  resources :statements do
+    collection do
+      get 'delete'
+      post 'load'
+      post 'upload'
+      post 'wesabe'
+    end
+  end
 
-  match 'categories/assign' => 'categories#assign'
-  match 'statements' => 'Statements#index'
-  match 'statements/delete' => 'Statements#delete'
-  match 'statements/load' => 'Statements#load'
-  match 'statements/upload' => 'Statements#upload'
-  match 'statements/wesabe' => 'Statements#wesabe'
+  root :to => 'Home#index', :as => :home
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
