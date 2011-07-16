@@ -2,7 +2,7 @@ class ExpensesController < ApplicationController
   # GET /expenses
   # GET /expenses.xml
   def index
-    @expenses = Expense.order('date DESC')
+    @expenses = Expense.includes(:category).order('date DESC')
     @expenses_months = @expenses.group_by { |t| t.date.beginning_of_month }
 
     respond_to do |format|
