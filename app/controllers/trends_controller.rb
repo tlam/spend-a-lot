@@ -49,13 +49,10 @@ class TrendsController < ApplicationController
 
   private
     def set_categories
-=begin
       @categories = Rails.cache.read('categories')
       if @categories.nil?
         @categories = Category.all
         Rails.cache.write('categories', @categories)
       end
-=end
-      @categories = Category.all
     end
 end
