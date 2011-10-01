@@ -17,6 +17,7 @@ SpendALot::Application.routes.draw do
   resources :expenses do
     collection do
       get 'descriptions'
+      get 'download'
       match ':year/:month' => 'Expenses#monthly', :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}, :as => :monthly
     end
   end

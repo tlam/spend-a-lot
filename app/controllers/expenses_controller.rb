@@ -101,4 +101,25 @@ class ExpensesController < ApplicationController
     @month = Date.new(params[:year].to_i, params[:month].to_i)
     render :action => 'monthly'
   end
+
+  def download
+    @expenses = Expense.includes(:category).order('date DESC')
+
+    fp = open('public/data/expenses.csv', 'w+')
+
+    fp.write('Date,Description,Payment,Amount,Category')
+    fp.write("\n")
+    @expenses.each do |expense|
+      if expense.category.nil?
+        next
+      end
+
+      line = '%s,%s,%s,%s,%s' % 
+          [expense.date, expense.description, expense.payment, expense.amount, expense.category.name]
+      fp.write(line + "\n")
+    end
+
+    fp.close
+    render :action =>'download'
+  end
 end
