@@ -25,31 +25,6 @@ class Category < ActiveRecord::Base
     return false
   end
 
-  def chart
-    month_expenses = Expense.where('category_id = ?', self.id).order('date').group_by { |c| c.date.beginning_of_month }
-
-    bar_data = []
-    month_data = []
-    month_expenses.each do |month, expenses|
-      sum = 0
-      expenses.each do |expense|
-        sum += expense.amount
-      end
-      bar_data.push(sum)
-      month_data.push(month.strftime('%b %Y'))
-    end
-
-    max_value = bar_data.max
-    y_axis =  '0|%.2f|%.2f|%.2f|%.2f' % [max_value*0.25, max_value*0.5, max_value*0.75, max_value]
-    month_data = [month_data.join('|'), y_axis]
-
-    @bar = Gchart.bar(:data => bar_data,
-                      :axis_with_labels => 'x,y',
-                      :axis_labels => month_data,
-                      :bar_width_and_spacing => '30,22',
-                      :size => '980x200')
-  end
-
   def monthly_data
     month_expenses = Expense.where(:category_id => self.id).order('date').group_by { |c| c.date.beginning_of_month }
 
