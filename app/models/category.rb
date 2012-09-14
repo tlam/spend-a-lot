@@ -51,7 +51,12 @@ class Category < ActiveRecord::Base
     results.each do |month, info|
       total += info[:sum]
     end
-    avg = total / results.length
+
+    if results.length > 0
+      avg = total / results.length
+    else
+      avg = 0
+    end
     return avg
   end
 end
