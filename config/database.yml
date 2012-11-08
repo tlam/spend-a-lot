@@ -11,7 +11,7 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: spend-a-lot_development
+  database: spendalot_development
   pool: 5
   username: tlam
   password: tlam
