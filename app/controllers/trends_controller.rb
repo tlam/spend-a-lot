@@ -13,6 +13,7 @@ class TrendsController < ApplicationController
     end
     
     @monthly_data = @category.monthly_data
+    @yearly_data = @category.yearly_data
     @months = @monthly_data.keys
     @average = @category.average(@monthly_data)
     current_month = Date.today.strftime('%b %Y')

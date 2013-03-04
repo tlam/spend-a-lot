@@ -39,6 +39,20 @@ class Category < ActiveRecord::Base
     @output
   end
 
+  def yearly_data
+    year_expenses = Expense.where(:category_id => self.id).order('date').group_by { |c| c.date.beginning_of_year }
+
+    @output = {}
+    year_expenses.each do |year, expenses|
+      sum = 0
+      expenses.each do |expense|
+        sum += expense.amount
+      end
+      @output[year.strftime('%Y')] = {:sum => sum, :date => year}
+    end
+    @output
+  end
+
   def average(data=nil)
     if data
       results = data.clone

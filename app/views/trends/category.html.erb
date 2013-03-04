@@ -17,6 +17,17 @@
   the monthly average by <%= number_with_precision(@difference, :precision => 2) %>
 </div>
 
+<h3>Year</h3>
+<table class="expense">
+<% @yearly_data.reverse_each do |month, dict| %>
+  <tr>
+    <td><%= dict[:date].year %></td>
+    <td class="amount"><%= number_with_precision(dict[:sum], :precision => 2) %></td>
+  </tr>
+<% end %>
+</table>
+
+<h3>Month</h3>
 <table class="expense">
 <% @monthly_data.reverse_each do |month, dict| %>
   <tr>
