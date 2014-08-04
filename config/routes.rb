@@ -27,6 +27,7 @@ SpendALot::Application.routes.draw do
   resources :statements do
     collection do
       get 'delete'
+      post 'csv'
       post 'load'
       post 'upload'
       post 'wesabe'

@@ -1,3 +1,5 @@
+require 'csv'
+
 class StatementsController < ApplicationController
   def index
     @files = []
@@ -11,6 +13,24 @@ class StatementsController < ApplicationController
     respond_to do |format|
       format.html # index.html.erb
     end
+  end
+
+  def csv
+    @expenses = Expense.includes(:category).order('date DESC')
+    CSV.open('data.csv', 'w') do |csv|
+      @expenses.each do |expense|
+        if expense.amount == 0
+          next
+        end
+        if expense.category.nil?
+          category = ''
+        else
+          category = expense.category.name
+        end
+        csv << [expense.description, category, expense.amount, expense.date]
+      end
+    end
+    return redirect_to :action => 'index'
   end
 
   def upload
