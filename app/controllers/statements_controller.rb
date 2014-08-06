@@ -18,6 +18,7 @@ class StatementsController < ApplicationController
   def csv
     @expenses = Expense.includes(:category).order('date DESC')
     CSV.open('data.csv', 'w') do |csv|
+      csv << ['Description', 'Category', 'Amount', 'Date', 'Payment']
       @expenses.each do |expense|
         if expense.amount == 0
           next
@@ -27,7 +28,7 @@ class StatementsController < ApplicationController
         else
           category = expense.category.name
         end
-        csv << [expense.description, category, expense.amount, expense.date]
+        csv << [expense.description, category, expense.amount, expense.date, expense.payment]
       end
     end
     return redirect_to :action => 'index'
