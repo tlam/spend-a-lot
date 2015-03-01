@@ -1,13 +1,13 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
 one:
-  description: MyString
-  type: MyString
+  description: Loblaws
+  category_id: 1
   amount: 9.99
   date: 2011-01-15 11:34:53
 
 two:
-  description: MyString
-  type: MyString
+  description: Jeans
+  category_id: 2
   amount: 9.99
   date: 2011-01-15 11:34:53
