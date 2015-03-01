@@ -64,7 +64,7 @@ class KeywordsController < ApplicationController
     @keyword = Keyword.find(params[:id])
 
     respond_to do |format|
-      if @keyword.update_attributes(params[:keyword])
+      if @keyword.update_attributes(params[:keyword].permit(:category_id, :words))
         format.html { redirect_to(@keyword, :notice => 'Keyword was successfully updated.') }
         format.xml  { head :ok }
       else

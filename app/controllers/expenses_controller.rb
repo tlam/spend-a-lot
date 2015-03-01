@@ -64,7 +64,7 @@ class ExpensesController < ApplicationController
     @expense = Expense.find(params[:id])
 
     respond_to do |format|
-      if @expense.update_attributes(params[:expense])
+      if @expense.update_attributes(params[:expense].permit(:description, :payment, :amount, :date, :category_id))
         format.html { redirect_to(@expense, :notice => 'Expense was successfully updated.') }
         format.xml  { head :ok }
       else

@@ -2,18 +2,21 @@
 <html>
 <head>
   <title>SpendALot</title>
-  <%= stylesheet_link_tag :all %>
+  <%= stylesheet_link_tag "base", media: "all" %>
+  <%= stylesheet_link_tag "expenses", media: "all" %>
+  <%= stylesheet_link_tag "scaffold", media: "all" %>
+  <%= stylesheet_link_tag "trends", media: "all" %>
   <%= stylesheet_link_tag "http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" %>
-  <%= javascript_include_tag "jquery.min.js" %>
-  <%= javascript_include_tag "jquery-ui.min.js" %>
-  <%= javascript_include_tag "rails.js" %>
-  <%= javascript_include_tag "application.js" %>
+  <%= javascript_include_tag "jquery.min" %>
+  <%= javascript_include_tag "jquery-ui.min" %>
+  <%= javascript_include_tag "rails" %>
+  <%= javascript_include_tag "application" %>
   <%= javascript_include_tag "http://www.google.com/jsapi" %>
   <script type="text/javascript">
     google.load('visualization', '1', {packages: ['corechart']});
   </script>
-  <%= javascript_include_tag "gcolumn_chart.js" %>
-  <%= javascript_include_tag "pie_chart.js" %>
+  <%= javascript_include_tag "gcolumn_chart" %>
+  <%= javascript_include_tag "pie_chart" %>
   <%= csrf_meta_tag %>
 </head>
 <body>

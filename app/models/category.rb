@@ -1,5 +1,5 @@
 class Category < ActiveRecord::Base
-  default_scope :order => 'name'
+  default_scope { order('name') }
   has_many :expenses
   has_many :keywords
   validates_presence_of :name

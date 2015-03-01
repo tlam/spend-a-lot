@@ -59,7 +59,7 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
 
     respond_to do |format|
-      if @category.update_attributes(params[:category])
+      if @category.update_attributes(params[:category].permit(:name, :slug))
         format.html { redirect_to(@category, :notice => 'Category was successfully updated.') }
         format.xml  { head :ok }
       else
