@@ -41,7 +41,7 @@ class ExpensesController < ApplicationController
   # POST /expenses
   # POST /expenses.xml
   def create
-    @expense = Expense.new(params[:expense])
+    @expense = Expense.create(expense_params)
 
     respond_to do |format|
       if @expense.save
@@ -122,4 +122,9 @@ class ExpensesController < ApplicationController
     fp.close
     render :action =>'download'
   end
+
+  private
+    def expense_params
+      params.require(:expense).permit(:description, :payment, :amount, :date, :category_id)
+    end
 end

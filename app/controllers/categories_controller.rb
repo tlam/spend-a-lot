@@ -40,7 +40,7 @@ class CategoriesController < ApplicationController
   # POST /categories
   # POST /categories.xml
   def create
-    @category = Category.new(params[:category])
+    @category = Category.create(category_params)
 
     respond_to do |format|
       if @category.save
@@ -103,4 +103,9 @@ class CategoriesController < ApplicationController
       format.json { render :json => @category }
     end
   end
+
+  private
+    def category_params
+      params.require(:category).permit(:name, :slug)
+    end
 end
