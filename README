@@ -1,3 +1,11 @@
+# Configuration
+
+- Install bundler
+
+    gem install bundler
+    bundler update
+    bundler install
+
 # Start dev
 
-script/rails s
+    rails s

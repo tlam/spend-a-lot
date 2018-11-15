@@ -2,15 +2,16 @@ SpendALot::Application.routes.draw do
 
   resources :trends do
     collection do
-      match ':slug' => 'Trends#category', :as => :category
-      match 'trends/:slug/:year/:month' => 'Trends#monthly', :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}, :as => :category_monthly
+      match ':slug' => 'trends#category', :as => :category, via: [:get]
+      #match 'photos', to: 'photos#show', via: [:get, :post]
+      match 'trends/:slug/:year/:month' => 'trends#monthly', :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}, :as => :category_monthly, via: [:get]
     end
   end
 
   resources :categories do
     collection do
       post 'assign'
-      match 'ajax-by-keyword' => 'categories#ajax_by_keyword'
+      match 'ajax-by-keyword' => 'categories#ajax_by_keyword', via: [:get]
     end
   end
 
@@ -18,7 +19,7 @@ SpendALot::Application.routes.draw do
     collection do
       get 'descriptions'
       get 'download'
-      match ':year/:month' => 'Expenses#monthly', :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}, :as => :monthly
+      match ':year/:month' => 'expenses#monthly', :constraints => {:year => /\d{4}/, :month => /\d{1,2}/}, :as => :monthly, via: [:get]
     end
   end
 
@@ -34,7 +35,7 @@ SpendALot::Application.routes.draw do
     end
   end
 
-  root :to => 'Home#index', :as => :home
+  root :to => 'home#index', :as => :home
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
